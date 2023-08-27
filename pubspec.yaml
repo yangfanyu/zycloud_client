@@ -1,7 +1,12 @@
 name: zycloud_client
-description: A starting point for Dart libraries or applications.
-version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+description: Dart network client library for ZyCloud service.
+version: 1.0.2
+repository: https://github.com/yangfanyu/zycloud_client
+
+topics:
+  - client
+  - zycloud
+  - codepush
 
 environment:
   sdk: ^3.0.0

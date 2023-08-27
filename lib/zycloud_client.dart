@@ -1,8 +1,8 @@
 library zycloud_client;
 
+export 'package:http/http.dart' show Request, Response;
 export 'package:shelf_easy/shelf_deps.dart' show MediaType, ObjectId;
 export 'package:shelf_easy/shelf_easy.dart' show DbJsonWraper, DbQueryField, EasyClient, EasyClientConfig, EasyLogHandler, EasyLogLevel, EasyLogger, EasyPacket, EasySecurity;
-export 'package:http/http.dart' show Request, Response;
 
 export 'src/model/all.dart';
 export 'src/tool/compage.dart';
