@@ -1,6 +1,6 @@
 name: zycloud_client
-description: Dart network client library for ZyCloud service.
-version: 1.0.2
+description: This library includes interfaces such as user module, administrator module, real-time chat module, custom data module, and Dart code push hosting module.
+version: 1.0.6
 repository: https://github.com/yangfanyu/zycloud_client
 
 topics:
