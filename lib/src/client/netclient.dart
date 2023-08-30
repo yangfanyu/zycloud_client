@@ -156,7 +156,7 @@ class NetClient {
   /* **************** http请求 **************** */
 
   ///获取应用公开配置信息
-  Future<EasyPacket<List<CodeFile>>> appManifest({bool codefiles = false, bool? codeVersion}) async {
+  Future<EasyPacket<List<CodeFile>>> appManifest({bool codefiles = false, int? codeVersion}) async {
     final response = await _httpGuestClient.httpRequest('/appManifest', data: {'bsid': bsid, 'codefiles': codefiles, 'codeVersion': codeVersion});
     if (response.ok) {
       final configure = response.data!['configure'];
