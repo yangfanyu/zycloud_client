@@ -1,3 +1,7 @@
+## 1.0.9
+
+- Add Business.minsdkv field and related functions.
+  
 ## 1.0.8
 
 - Fix the codeVersion parameter type of appManifest route to `int?`.
