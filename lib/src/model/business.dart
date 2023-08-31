@@ -42,10 +42,13 @@ class Business extends DbBaseModel {
   ///SDK加解密密钥
   String secret;
 
-  ///最新版本号码
+  ///最新源码版本序号
   int version;
 
-  ///语言环境类型
+  ///最新源码最小sdk
+  int minsdkv;
+
+  ///服务端语言环境类型
   String language;
 
   ///提现交易金额的分红比例
@@ -183,6 +186,7 @@ class Business extends DbBaseModel {
     String? email,
     String? secret,
     int? version,
+    int? minsdkv,
     String? language,
     int? cashoutRate,
     int? vritualRate,
@@ -233,6 +237,7 @@ class Business extends DbBaseModel {
         email = email ?? '',
         secret = secret ?? '',
         version = version ?? 0,
+        minsdkv = minsdkv ?? 0,
         language = language ?? 'zh',
         cashoutRate = cashoutRate ?? 0,
         vritualRate = vritualRate ?? 0,
@@ -290,6 +295,7 @@ class Business extends DbBaseModel {
       email: DbQueryField.tryParseString(map['email']),
       secret: DbQueryField.tryParseString(map['secret']),
       version: DbQueryField.tryParseInt(map['version']),
+      minsdkv: DbQueryField.tryParseInt(map['minsdkv']),
       language: DbQueryField.tryParseString(map['language']),
       cashoutRate: DbQueryField.tryParseInt(map['cashoutRate']),
       vritualRate: DbQueryField.tryParseInt(map['vritualRate']),
@@ -351,6 +357,7 @@ class Business extends DbBaseModel {
       'email': DbQueryField.toBaseType(email),
       'secret': DbQueryField.toBaseType(secret),
       'version': DbQueryField.toBaseType(version),
+      'minsdkv': DbQueryField.toBaseType(minsdkv),
       'language': DbQueryField.toBaseType(language),
       'cashoutRate': DbQueryField.toBaseType(cashoutRate),
       'vritualRate': DbQueryField.toBaseType(vritualRate),
@@ -407,6 +414,7 @@ class Business extends DbBaseModel {
       'email': email,
       'secret': secret,
       'version': version,
+      'minsdkv': minsdkv,
       'language': language,
       'cashoutRate': cashoutRate,
       'vritualRate': vritualRate,
@@ -463,6 +471,7 @@ class Business extends DbBaseModel {
     if (map.containsKey('email')) email = parser.email;
     if (map.containsKey('secret')) secret = parser.secret;
     if (map.containsKey('version')) version = parser.version;
+    if (map.containsKey('minsdkv')) minsdkv = parser.minsdkv;
     if (map.containsKey('language')) language = parser.language;
     if (map.containsKey('cashoutRate')) cashoutRate = parser.cashoutRate;
     if (map.containsKey('vritualRate')) vritualRate = parser.vritualRate;
@@ -517,6 +526,7 @@ class Business extends DbBaseModel {
     if (map.containsKey('email')) email = map['email'];
     if (map.containsKey('secret')) secret = map['secret'];
     if (map.containsKey('version')) version = map['version'];
+    if (map.containsKey('minsdkv')) minsdkv = map['minsdkv'];
     if (map.containsKey('language')) language = map['language'];
     if (map.containsKey('cashoutRate')) cashoutRate = map['cashoutRate'];
     if (map.containsKey('vritualRate')) vritualRate = map['vritualRate'];
@@ -594,10 +604,13 @@ class BusinessDirty {
   ///SDK加解密密钥
   set secret(String value) => data['secret'] = DbQueryField.toBaseType(value);
 
-  ///最新版本号码
+  ///最新源码版本序号
   set version(int value) => data['version'] = DbQueryField.toBaseType(value);
 
-  ///语言环境类型
+  ///最新源码最小sdk
+  set minsdkv(int value) => data['minsdkv'] = DbQueryField.toBaseType(value);
+
+  ///服务端语言环境类型
   set language(String value) => data['language'] = DbQueryField.toBaseType(value);
 
   ///提现交易金额的分红比例
