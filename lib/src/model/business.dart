@@ -120,7 +120,7 @@ class Business extends DbBaseModel {
   ///支付宝平台公钥证书（证书模式）
   String alipayCertPublicKey;
 
-  ///支付宝商户应用公钥证书（证书模式））
+  ///支付宝应用公钥证书（证书模式））
   String alipayCertAppPublicKey;
 
   ///阿里短信AccessKeyId
@@ -140,6 +140,15 @@ class Business extends DbBaseModel {
 
   ///阿里短信TemplateCode
   String alismsTemplateCode;
+
+  ///高德地图androidKey
+  String aliamapAndroidKey;
+
+  ///高德地图iosKey
+  String aliamapIosKey;
+
+  ///高德地图webKey
+  String aliamapWebKey;
 
   ///苹果KeyP8
   String appleKeyP8;
@@ -218,6 +227,9 @@ class Business extends DbBaseModel {
     String? alismsApiVersion,
     String? alismsSignName,
     String? alismsTemplateCode,
+    String? aliamapAndroidKey,
+    String? aliamapIosKey,
+    String? aliamapWebKey,
     String? appleKeyP8,
     String? appleKeyP8Public,
     String? appleAuthClientId,
@@ -269,6 +281,9 @@ class Business extends DbBaseModel {
         alismsApiVersion = alismsApiVersion ?? '',
         alismsSignName = alismsSignName ?? '',
         alismsTemplateCode = alismsTemplateCode ?? '',
+        aliamapAndroidKey = aliamapAndroidKey ?? '',
+        aliamapIosKey = aliamapIosKey ?? '',
+        aliamapWebKey = aliamapWebKey ?? '',
         appleKeyP8 = appleKeyP8 ?? '',
         appleKeyP8Public = appleKeyP8Public ?? '',
         appleAuthClientId = appleAuthClientId ?? '',
@@ -327,6 +342,9 @@ class Business extends DbBaseModel {
       alismsApiVersion: DbQueryField.tryParseString(map['alismsApiVersion']),
       alismsSignName: DbQueryField.tryParseString(map['alismsSignName']),
       alismsTemplateCode: DbQueryField.tryParseString(map['alismsTemplateCode']),
+      aliamapAndroidKey: DbQueryField.tryParseString(map['aliamapAndroidKey']),
+      aliamapIosKey: DbQueryField.tryParseString(map['aliamapIosKey']),
+      aliamapWebKey: DbQueryField.tryParseString(map['aliamapWebKey']),
       appleKeyP8: DbQueryField.tryParseString(map['appleKeyP8']),
       appleKeyP8Public: DbQueryField.tryParseString(map['appleKeyP8Public']),
       appleAuthClientId: DbQueryField.tryParseString(map['appleAuthClientId']),
@@ -389,6 +407,9 @@ class Business extends DbBaseModel {
       'alismsApiVersion': DbQueryField.toBaseType(alismsApiVersion),
       'alismsSignName': DbQueryField.toBaseType(alismsSignName),
       'alismsTemplateCode': DbQueryField.toBaseType(alismsTemplateCode),
+      'aliamapAndroidKey': DbQueryField.toBaseType(aliamapAndroidKey),
+      'aliamapIosKey': DbQueryField.toBaseType(aliamapIosKey),
+      'aliamapWebKey': DbQueryField.toBaseType(aliamapWebKey),
       'appleKeyP8': DbQueryField.toBaseType(appleKeyP8),
       'appleKeyP8Public': DbQueryField.toBaseType(appleKeyP8Public),
       'appleAuthClientId': DbQueryField.toBaseType(appleAuthClientId),
@@ -446,6 +467,9 @@ class Business extends DbBaseModel {
       'alismsApiVersion': alismsApiVersion,
       'alismsSignName': alismsSignName,
       'alismsTemplateCode': alismsTemplateCode,
+      'aliamapAndroidKey': aliamapAndroidKey,
+      'aliamapIosKey': aliamapIosKey,
+      'aliamapWebKey': aliamapWebKey,
       'appleKeyP8': appleKeyP8,
       'appleKeyP8Public': appleKeyP8Public,
       'appleAuthClientId': appleAuthClientId,
@@ -503,6 +527,9 @@ class Business extends DbBaseModel {
     if (map.containsKey('alismsApiVersion')) alismsApiVersion = parser.alismsApiVersion;
     if (map.containsKey('alismsSignName')) alismsSignName = parser.alismsSignName;
     if (map.containsKey('alismsTemplateCode')) alismsTemplateCode = parser.alismsTemplateCode;
+    if (map.containsKey('aliamapAndroidKey')) aliamapAndroidKey = parser.aliamapAndroidKey;
+    if (map.containsKey('aliamapIosKey')) aliamapIosKey = parser.aliamapIosKey;
+    if (map.containsKey('aliamapWebKey')) aliamapWebKey = parser.aliamapWebKey;
     if (map.containsKey('appleKeyP8')) appleKeyP8 = parser.appleKeyP8;
     if (map.containsKey('appleKeyP8Public')) appleKeyP8Public = parser.appleKeyP8Public;
     if (map.containsKey('appleAuthClientId')) appleAuthClientId = parser.appleAuthClientId;
@@ -558,6 +585,9 @@ class Business extends DbBaseModel {
     if (map.containsKey('alismsApiVersion')) alismsApiVersion = map['alismsApiVersion'];
     if (map.containsKey('alismsSignName')) alismsSignName = map['alismsSignName'];
     if (map.containsKey('alismsTemplateCode')) alismsTemplateCode = map['alismsTemplateCode'];
+    if (map.containsKey('aliamapAndroidKey')) aliamapAndroidKey = map['aliamapAndroidKey'];
+    if (map.containsKey('aliamapIosKey')) aliamapIosKey = map['aliamapIosKey'];
+    if (map.containsKey('aliamapWebKey')) aliamapWebKey = map['aliamapWebKey'];
     if (map.containsKey('appleKeyP8')) appleKeyP8 = map['appleKeyP8'];
     if (map.containsKey('appleKeyP8Public')) appleKeyP8Public = map['appleKeyP8Public'];
     if (map.containsKey('appleAuthClientId')) appleAuthClientId = map['appleAuthClientId'];
@@ -682,7 +712,7 @@ class BusinessDirty {
   ///支付宝平台公钥证书（证书模式）
   set alipayCertPublicKey(String value) => data['alipayCertPublicKey'] = DbQueryField.toBaseType(value);
 
-  ///支付宝商户应用公钥证书（证书模式））
+  ///支付宝应用公钥证书（证书模式））
   set alipayCertAppPublicKey(String value) => data['alipayCertAppPublicKey'] = DbQueryField.toBaseType(value);
 
   ///阿里短信AccessKeyId
@@ -702,6 +732,15 @@ class BusinessDirty {
 
   ///阿里短信TemplateCode
   set alismsTemplateCode(String value) => data['alismsTemplateCode'] = DbQueryField.toBaseType(value);
+
+  ///高德地图androidKey
+  set aliamapAndroidKey(String value) => data['aliamapAndroidKey'] = DbQueryField.toBaseType(value);
+
+  ///高德地图iosKey
+  set aliamapIosKey(String value) => data['aliamapIosKey'] = DbQueryField.toBaseType(value);
+
+  ///高德地图webKey
+  set aliamapWebKey(String value) => data['aliamapWebKey'] = DbQueryField.toBaseType(value);
 
   ///苹果KeyP8
   set appleKeyP8(String value) => data['appleKeyP8'] = DbQueryField.toBaseType(value);

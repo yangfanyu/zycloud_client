@@ -39,8 +39,14 @@ class LogLogin extends DbBaseModel {
   ///设备详细信息
   DbJsonWraper deviceDetail;
 
-  ///今日登录次数
+  ///日志记录次数
   int loginCount;
+
+  ///在线时长毫秒
+  int onlineMillis;
+
+  ///登录ip与时间
+  DbJsonWraper historyIpTms;
 
   ///最近定位信息
   Location location;
@@ -78,6 +84,8 @@ class LogLogin extends DbBaseModel {
     String? deviceVersion,
     DbJsonWraper? deviceDetail,
     int? loginCount,
+    int? onlineMillis,
+    DbJsonWraper? historyIpTms,
     Location? location,
     int? login,
     String? ip,
@@ -92,6 +100,8 @@ class LogLogin extends DbBaseModel {
         deviceVersion = deviceVersion ?? '',
         deviceDetail = deviceDetail ?? DbJsonWraper(),
         loginCount = loginCount ?? 0,
+        onlineMillis = onlineMillis ?? 0,
+        historyIpTms = historyIpTms ?? DbJsonWraper(),
         location = location ?? Location(),
         login = login ?? 0,
         ip = ip ?? '';
@@ -113,6 +123,8 @@ class LogLogin extends DbBaseModel {
       deviceVersion: DbQueryField.tryParseString(map['deviceVersion']),
       deviceDetail: map['deviceDetail'] is Map ? DbJsonWraper.fromJson(map['deviceDetail']) : map['deviceDetail'],
       loginCount: DbQueryField.tryParseInt(map['loginCount']),
+      onlineMillis: DbQueryField.tryParseInt(map['onlineMillis']),
+      historyIpTms: map['historyIpTms'] is Map ? DbJsonWraper.fromJson(map['historyIpTms']) : map['historyIpTms'],
       location: map['location'] is Map ? Location.fromJson(map['location']) : map['location'],
       login: DbQueryField.tryParseInt(map['login']),
       ip: DbQueryField.tryParseString(map['ip']),
@@ -138,6 +150,8 @@ class LogLogin extends DbBaseModel {
       'deviceVersion': DbQueryField.toBaseType(deviceVersion),
       'deviceDetail': DbQueryField.toBaseType(deviceDetail),
       'loginCount': DbQueryField.toBaseType(loginCount),
+      'onlineMillis': DbQueryField.toBaseType(onlineMillis),
+      'historyIpTms': DbQueryField.toBaseType(historyIpTms),
       'location': DbQueryField.toBaseType(location),
       'login': DbQueryField.toBaseType(login),
       'ip': DbQueryField.toBaseType(ip),
@@ -158,6 +172,8 @@ class LogLogin extends DbBaseModel {
       'deviceVersion': deviceVersion,
       'deviceDetail': deviceDetail,
       'loginCount': loginCount,
+      'onlineMillis': onlineMillis,
+      'historyIpTms': historyIpTms,
       'location': location,
       'login': login,
       'ip': ip,
@@ -178,6 +194,8 @@ class LogLogin extends DbBaseModel {
     if (map.containsKey('deviceVersion')) deviceVersion = parser.deviceVersion;
     if (map.containsKey('deviceDetail')) deviceDetail = parser.deviceDetail;
     if (map.containsKey('loginCount')) loginCount = parser.loginCount;
+    if (map.containsKey('onlineMillis')) onlineMillis = parser.onlineMillis;
+    if (map.containsKey('historyIpTms')) historyIpTms = parser.historyIpTms;
     if (map.containsKey('location')) location = parser.location;
     if (map.containsKey('login')) login = parser.login;
     if (map.containsKey('ip')) ip = parser.ip;
@@ -196,6 +214,8 @@ class LogLogin extends DbBaseModel {
     if (map.containsKey('deviceVersion')) deviceVersion = map['deviceVersion'];
     if (map.containsKey('deviceDetail')) deviceDetail = map['deviceDetail'];
     if (map.containsKey('loginCount')) loginCount = map['loginCount'];
+    if (map.containsKey('onlineMillis')) onlineMillis = map['onlineMillis'];
+    if (map.containsKey('historyIpTms')) historyIpTms = map['historyIpTms'];
     if (map.containsKey('location')) location = map['location'];
     if (map.containsKey('login')) login = map['login'];
     if (map.containsKey('ip')) ip = map['ip'];
@@ -235,8 +255,14 @@ class LogLoginDirty {
   ///设备详细信息
   set deviceDetail(DbJsonWraper value) => data['deviceDetail'] = DbQueryField.toBaseType(value);
 
-  ///今日登录次数
+  ///日志记录次数
   set loginCount(int value) => data['loginCount'] = DbQueryField.toBaseType(value);
+
+  ///在线时长毫秒
+  set onlineMillis(int value) => data['onlineMillis'] = DbQueryField.toBaseType(value);
+
+  ///登录ip与时间
+  set historyIpTms(DbJsonWraper value) => data['historyIpTms'] = DbQueryField.toBaseType(value);
 
   ///最近定位信息
   set location(Location value) => data['location'] = DbQueryField.toBaseType(value);

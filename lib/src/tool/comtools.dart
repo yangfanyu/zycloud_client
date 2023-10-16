@@ -29,23 +29,23 @@ class ComTools {
   }
 
   ///格式化显示时间
-  static String formatDateTime(int mills, {bool mmDDhhMM = false, bool yyMMdd = false, bool hhmmss = false}) {
+  static String formatDateTime(int millis, {bool mmDDhhMM = false, bool yyMMdd = false, bool hhmmss = false}) {
     if (mmDDhhMM) {
-      final date = DateTime.fromMillisecondsSinceEpoch(mills);
+      final date = DateTime.fromMillisecondsSinceEpoch(millis);
       return '${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')} ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
     } else if (yyMMdd && hhmmss) {
-      final date = DateTime.fromMillisecondsSinceEpoch(mills);
+      final date = DateTime.fromMillisecondsSinceEpoch(millis);
       return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')} ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}:${date.second.toString().padLeft(2, '0')}';
     } else if (yyMMdd) {
-      final date = DateTime.fromMillisecondsSinceEpoch(mills);
+      final date = DateTime.fromMillisecondsSinceEpoch(millis);
       return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
     } else if (hhmmss) {
-      final date = DateTime.fromMillisecondsSinceEpoch(mills);
+      final date = DateTime.fromMillisecondsSinceEpoch(millis);
       return '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}:${date.second.toString().padLeft(2, '0')}';
     } else {
       final now = DateTime.now();
       final today = DateTime(now.year, now.month, now.day, 23, 59, 59, 999); //今天的结束时间点
-      final date = DateTime.fromMillisecondsSinceEpoch(mills);
+      final date = DateTime.fromMillisecondsSinceEpoch(millis);
       final abs = today.difference(date);
       if (abs.inDays == 0) {
         return '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}:${date.second.toString().padLeft(2, '0')}';

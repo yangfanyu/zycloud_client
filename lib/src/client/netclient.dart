@@ -272,6 +272,16 @@ class NetClient {
     return response;
   }
 
+  ///高德IP解析，当[requestIp]为true时，返回对当前网络请求客户端的解析结果
+  Future<EasyPacket<Location?>> amapIpParse({required String specifyIp, bool requestIp = false}) async {
+    final response = await _httpAliveClient.httpRequest('/amapIpParse', data: {'bsid': bsid, 'specifyIp': specifyIp, 'requestIp': requestIp});
+    if (response.ok) {
+      return response.cloneExtra(Location.fromJson(response.data!['location']));
+    } else {
+      return response.cloneExtra(null);
+    }
+  }
+
   ///微信充值下单
   Future<EasyPacket<Map<String, dynamic>?>> wechatStart({required int goodsNo}) async {
     final response = await _httpAliveClient.httpRequest('/wechatStart', data: {'bsid': bsid, 'uid': user.id, 'goodsNo': goodsNo});
@@ -1214,14 +1224,14 @@ class NetClient {
   }
 
   ///记录登录日志
-  Future<EasyPacket<void>> doLogLogin({int clientVersion = 0, String deviceType = 'terminal', String deviceVersion = '0.0', Map<String, dynamic> deviceDetail = const {}}) async {
-    final response = await _websocketClient.websocketRequest('doLogLogin', data: {'bsid': bsid, 'clientVersion': clientVersion, 'deviceType': deviceType, 'deviceVersion': deviceVersion, 'deviceDetail': deviceDetail});
+  Future<EasyPacket<void>> doLogLogin({int clientVersion = 0, String deviceType = 'terminal', String deviceVersion = '0.0', Map<String, dynamic> deviceDetail = const {}, int onlineMillis = 0}) async {
+    final response = await _websocketClient.websocketRequest('doLogLogin', data: {'bsid': bsid, 'clientVersion': clientVersion, 'deviceType': deviceType, 'deviceVersion': deviceVersion, 'deviceDetail': deviceDetail, 'onlineMillis': onlineMillis});
     return response;
   }
 
   ///记录异常日志
   Future<EasyPacket<void>> doLogError({int clientVersion = 0, String deviceType = 'terminal', String deviceVersion = '0.0', Map<String, dynamic> deviceDetail = const {}, Map<String, dynamic> errorDetail = const {}, int errorTime = 0}) async {
-    final response = await _websocketClient.websocketRequest('doLogError', data: {'bsid': bsid, 'clientVersion': clientVersion, 'deviceType': deviceType, 'deviceVersion': deviceVersion, 'deviceDetail': deviceDetail, 'errorDetail': {}, 'errorTime': errorTime});
+    final response = await _websocketClient.websocketRequest('doLogError', data: {'bsid': bsid, 'clientVersion': clientVersion, 'deviceType': deviceType, 'deviceVersion': deviceVersion, 'deviceDetail': deviceDetail, 'errorDetail': errorDetail, 'errorTime': errorTime});
     return response;
   }
 
