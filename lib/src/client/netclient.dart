@@ -748,8 +748,8 @@ class NetClient {
   }
 
   ///创建提现交易订单
-  Future<EasyPacket<void>> paymentCashout({required int rmbfen, required String accountTp, required String accountNo, String? cashPassword}) async {
-    final response = await _websocketClient.websocketRequest('paymentCashout', data: {'bsid': bsid, 'rmbfen': rmbfen, 'accountTp': accountTp, 'accountNo': accountNo, 'cashPassword': cashPassword});
+  Future<EasyPacket<void>> paymentCashout({required int rmbfen, required String accountTp, required String accountNo, required String accountName, String? cashPassword}) async {
+    final response = await _websocketClient.websocketRequest('paymentCashout', data: {'bsid': bsid, 'rmbfen': rmbfen, 'accountTp': accountTp, 'accountNo': accountNo, 'accountName': accountName, 'cashPassword': cashPassword});
     return response;
   }
 

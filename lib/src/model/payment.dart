@@ -85,8 +85,20 @@ class Payment extends DbBaseModel {
   ///提现账户号码
   String cashoutAccountNo;
 
+  ///提现账户姓名
+  String cashoutAccountName;
+
   ///提现扣除手续费后实际到账
   int cashoutActualRmbfen;
+
+  ///提现由系统自动操作时的请求数据
+  List<DbJsonWraper> cashoutAutoData;
+
+  ///提现由系统自动操作时的请求结果
+  List<DbJsonWraper> cashoutAutoResult;
+
+  ///提现由系统自动操作时的通知数据
+  List<DbJsonWraper> cashoutAutoNotify;
 
   ///是否为虚拟货币充值
   bool virtualValueMode;
@@ -150,7 +162,11 @@ class Payment extends DbBaseModel {
     List<DbJsonWraper>? passiveRechargeVerifyResult,
     String? cashoutAccountTp,
     String? cashoutAccountNo,
+    String? cashoutAccountName,
     int? cashoutActualRmbfen,
+    List<DbJsonWraper>? cashoutAutoData,
+    List<DbJsonWraper>? cashoutAutoResult,
+    List<DbJsonWraper>? cashoutAutoNotify,
     bool? virtualValueMode,
     int? virtualCustomXNo,
     ObjectId? virtualCustomXId,
@@ -181,7 +197,11 @@ class Payment extends DbBaseModel {
         passiveRechargeVerifyResult = passiveRechargeVerifyResult ?? [],
         cashoutAccountTp = cashoutAccountTp ?? '',
         cashoutAccountNo = cashoutAccountNo ?? '',
+        cashoutAccountName = cashoutAccountName ?? '',
         cashoutActualRmbfen = cashoutActualRmbfen ?? 0,
+        cashoutAutoData = cashoutAutoData ?? [],
+        cashoutAutoResult = cashoutAutoResult ?? [],
+        cashoutAutoNotify = cashoutAutoNotify ?? [],
         virtualValueMode = virtualValueMode ?? false,
         virtualCustomXNo = virtualCustomXNo ?? 0,
         virtualCustomXId = virtualCustomXId ?? ObjectId.fromHexString('000000000000000000000000'),
@@ -221,7 +241,11 @@ class Payment extends DbBaseModel {
       passiveRechargeVerifyResult: (map['passiveRechargeVerifyResult'] as List?)?.map((v) => DbJsonWraper.fromJson(v)).toList(),
       cashoutAccountTp: DbQueryField.tryParseString(map['cashoutAccountTp']),
       cashoutAccountNo: DbQueryField.tryParseString(map['cashoutAccountNo']),
+      cashoutAccountName: DbQueryField.tryParseString(map['cashoutAccountName']),
       cashoutActualRmbfen: DbQueryField.tryParseInt(map['cashoutActualRmbfen']),
+      cashoutAutoData: (map['cashoutAutoData'] as List?)?.map((v) => DbJsonWraper.fromJson(v)).toList(),
+      cashoutAutoResult: (map['cashoutAutoResult'] as List?)?.map((v) => DbJsonWraper.fromJson(v)).toList(),
+      cashoutAutoNotify: (map['cashoutAutoNotify'] as List?)?.map((v) => DbJsonWraper.fromJson(v)).toList(),
       virtualValueMode: DbQueryField.tryParseBool(map['virtualValueMode']),
       virtualCustomXNo: DbQueryField.tryParseInt(map['virtualCustomXNo']),
       virtualCustomXId: DbQueryField.tryParseObjectId(map['virtualCustomXId']),
@@ -265,7 +289,11 @@ class Payment extends DbBaseModel {
       'passiveRechargeVerifyResult': DbQueryField.toBaseType(passiveRechargeVerifyResult),
       'cashoutAccountTp': DbQueryField.toBaseType(cashoutAccountTp),
       'cashoutAccountNo': DbQueryField.toBaseType(cashoutAccountNo),
+      'cashoutAccountName': DbQueryField.toBaseType(cashoutAccountName),
       'cashoutActualRmbfen': DbQueryField.toBaseType(cashoutActualRmbfen),
+      'cashoutAutoData': DbQueryField.toBaseType(cashoutAutoData),
+      'cashoutAutoResult': DbQueryField.toBaseType(cashoutAutoResult),
+      'cashoutAutoNotify': DbQueryField.toBaseType(cashoutAutoNotify),
       'virtualValueMode': DbQueryField.toBaseType(virtualValueMode),
       'virtualCustomXNo': DbQueryField.toBaseType(virtualCustomXNo),
       'virtualCustomXId': DbQueryField.toBaseType(virtualCustomXId),
@@ -304,7 +332,11 @@ class Payment extends DbBaseModel {
       'passiveRechargeVerifyResult': passiveRechargeVerifyResult,
       'cashoutAccountTp': cashoutAccountTp,
       'cashoutAccountNo': cashoutAccountNo,
+      'cashoutAccountName': cashoutAccountName,
       'cashoutActualRmbfen': cashoutActualRmbfen,
+      'cashoutAutoData': cashoutAutoData,
+      'cashoutAutoResult': cashoutAutoResult,
+      'cashoutAutoNotify': cashoutAutoNotify,
       'virtualValueMode': virtualValueMode,
       'virtualCustomXNo': virtualCustomXNo,
       'virtualCustomXId': virtualCustomXId,
@@ -343,7 +375,11 @@ class Payment extends DbBaseModel {
     if (map.containsKey('passiveRechargeVerifyResult')) passiveRechargeVerifyResult = parser.passiveRechargeVerifyResult;
     if (map.containsKey('cashoutAccountTp')) cashoutAccountTp = parser.cashoutAccountTp;
     if (map.containsKey('cashoutAccountNo')) cashoutAccountNo = parser.cashoutAccountNo;
+    if (map.containsKey('cashoutAccountName')) cashoutAccountName = parser.cashoutAccountName;
     if (map.containsKey('cashoutActualRmbfen')) cashoutActualRmbfen = parser.cashoutActualRmbfen;
+    if (map.containsKey('cashoutAutoData')) cashoutAutoData = parser.cashoutAutoData;
+    if (map.containsKey('cashoutAutoResult')) cashoutAutoResult = parser.cashoutAutoResult;
+    if (map.containsKey('cashoutAutoNotify')) cashoutAutoNotify = parser.cashoutAutoNotify;
     if (map.containsKey('virtualValueMode')) virtualValueMode = parser.virtualValueMode;
     if (map.containsKey('virtualCustomXNo')) virtualCustomXNo = parser.virtualCustomXNo;
     if (map.containsKey('virtualCustomXId')) virtualCustomXId = parser.virtualCustomXId;
@@ -380,7 +416,11 @@ class Payment extends DbBaseModel {
     if (map.containsKey('passiveRechargeVerifyResult')) passiveRechargeVerifyResult = map['passiveRechargeVerifyResult'];
     if (map.containsKey('cashoutAccountTp')) cashoutAccountTp = map['cashoutAccountTp'];
     if (map.containsKey('cashoutAccountNo')) cashoutAccountNo = map['cashoutAccountNo'];
+    if (map.containsKey('cashoutAccountName')) cashoutAccountName = map['cashoutAccountName'];
     if (map.containsKey('cashoutActualRmbfen')) cashoutActualRmbfen = map['cashoutActualRmbfen'];
+    if (map.containsKey('cashoutAutoData')) cashoutAutoData = map['cashoutAutoData'];
+    if (map.containsKey('cashoutAutoResult')) cashoutAutoResult = map['cashoutAutoResult'];
+    if (map.containsKey('cashoutAutoNotify')) cashoutAutoNotify = map['cashoutAutoNotify'];
     if (map.containsKey('virtualValueMode')) virtualValueMode = map['virtualValueMode'];
     if (map.containsKey('virtualCustomXNo')) virtualCustomXNo = map['virtualCustomXNo'];
     if (map.containsKey('virtualCustomXId')) virtualCustomXId = map['virtualCustomXId'];
@@ -469,8 +509,20 @@ class PaymentDirty {
   ///提现账户号码
   set cashoutAccountNo(String value) => data['cashoutAccountNo'] = DbQueryField.toBaseType(value);
 
+  ///提现账户姓名
+  set cashoutAccountName(String value) => data['cashoutAccountName'] = DbQueryField.toBaseType(value);
+
   ///提现扣除手续费后实际到账
   set cashoutActualRmbfen(int value) => data['cashoutActualRmbfen'] = DbQueryField.toBaseType(value);
+
+  ///提现由系统自动操作时的请求数据
+  set cashoutAutoData(List<DbJsonWraper> value) => data['cashoutAutoData'] = DbQueryField.toBaseType(value);
+
+  ///提现由系统自动操作时的请求结果
+  set cashoutAutoResult(List<DbJsonWraper> value) => data['cashoutAutoResult'] = DbQueryField.toBaseType(value);
+
+  ///提现由系统自动操作时的通知数据
+  set cashoutAutoNotify(List<DbJsonWraper> value) => data['cashoutAutoNotify'] = DbQueryField.toBaseType(value);
 
   ///是否为虚拟货币充值
   set virtualValueMode(bool value) => data['virtualValueMode'] = DbQueryField.toBaseType(value);
