@@ -1,3 +1,7 @@
+## 1.0.11
+
+- Add fields to the Payment class and add parameters to the paymentCashout route.
+  
 ## 1.0.10
 
 - Added amapIpParse route and added some other parameters or class fields.
