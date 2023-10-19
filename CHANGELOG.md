@@ -1,3 +1,7 @@
+## 1.0.12
+
+- Remove paymentExists route, add paymentUpdate route, modify wechatStart route.
+  
 ## 1.0.11
 
 - Add fields to the Payment class and add parameters to the paymentCashout route.
