@@ -283,7 +283,7 @@ class NetClient {
   }
 
   ///微信充值下单
-  Future<EasyPacket<Map<String, dynamic>?>> wechatStart({required int goodsNo}) async {
+  Future<EasyPacket<String?>> wechatStart({required int goodsNo}) async {
     final response = await _httpAliveClient.httpRequest('/wechatStart', data: {'bsid': bsid, 'uid': user.id, 'goodsNo': goodsNo});
     if (response.ok) {
       return response.cloneExtra(response.data!['result']);
@@ -760,13 +760,9 @@ class NetClient {
   }
 
   ///统计虚拟交易订单
-  Future<EasyPacket<int>> paymentExists({required int customXNo, required ObjectId customXId}) async {
-    final response = await _websocketClient.websocketRequest('paymentExists', data: {'bsid': bsid, 'customXNo': customXNo, 'customXId': customXId});
-    if (response.ok) {
-      return response.cloneExtra(response.data!['totalcnt']);
-    } else {
-      return response.cloneExtra(null);
-    }
+  Future<EasyPacket<void>> paymentUpdate({required ObjectId id, required String accountTp, required String accountNo, required String accountName}) async {
+    final response = await _websocketClient.websocketRequest('paymentUpdate', data: {'bsid': bsid, 'id': id, 'accountTp': accountTp, 'accountNo': accountNo, 'accountName': accountName});
+    return response;
   }
 
   ///加载交易账单列表，[reload]为true时重置加载状态后再加载，返回值[EasyPacket.extra]字段为true时表示已加载全部数据
