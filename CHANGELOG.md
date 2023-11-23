@@ -1,3 +1,7 @@
+## 1.1.1
+
+- Simplify the calling method of creating websocket connection inside NetClient.
+  
 ## 1.1.0
 
 - Optimize client parameter structure and file structure.
