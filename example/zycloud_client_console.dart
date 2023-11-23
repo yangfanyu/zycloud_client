@@ -2,18 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:shelf_easy/shelf_deps.dart';
-import 'package:shelf_easy/shelf_easy.dart';
-
-import '../model/all.dart';
-import '../tool/compage.dart';
-import '../tool/comtools.dart';
-import 'netclient.dart';
+import 'package:zycloud_client/zycloud_client.dart';
 
 ///
 ///控制台客户端
 ///
-class CmdClient extends EasyLogger {
+class ZyCloudClientConsole extends EasyLogger {
   ///操作后控制台输出的延迟时间
   static const delayDuration = Duration(microseconds: 500);
 
@@ -40,16 +34,28 @@ class CmdClient extends EasyLogger {
     }
   }
 
-  CmdClient({
+  ZyCloudClientConsole({
     EasyLogLevel logLevel = EasyLogLevel.info,
     required String host,
     required int port,
+    bool binary = true,
+    bool sslEnable = false,
     required String bsid,
     required String secret,
-    bool binary = true,
     bool isolate = true,
-    bool sslEnable = false,
-  })  : _netClient = NetClient(logLevel: logLevel, host: host, port: port, bsid: bsid, secret: secret, binary: binary, isolate: isolate, sslEnable: sslEnable, onCredentials: onCredentials),
+  })  : _netClient = NetClient(
+          config: EasyClientConfig(
+            logLevel: logLevel,
+            host: host,
+            port: port,
+            binary: binary,
+            sslEnable: sslEnable,
+          ),
+          bsid: bsid,
+          secret: secret,
+          isolate: isolate,
+          onCredentials: onCredentials,
+        ),
         super(logTag: '');
 
   ///导航到新页面

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:lpinyin/lpinyin.dart' show PinyinFormat, PinyinHelper;
-import 'package:shelf_easy/shelf_deps.dart' show MediaType, ObjectId;
-import 'package:shelf_easy/shelf_easy.dart' show DbJsonWraper, DbQueryField, EasyClient, EasyClientConfig, EasyLogHandler, EasyLogLevel, EasyLogger, EasyPacket, EasySecurity;
+import 'package:lpinyin/lpinyin.dart';
+import 'package:shelf_easy/shelf_deps.dart';
+import 'package:shelf_easy/shelf_easy.dart';
 
 import '../model/all.dart';
 import '../tool/compage.dart';
@@ -13,20 +13,8 @@ import '../tool/session.dart';
 ///网络客户端
 ///
 class NetClient {
-  ///日志处理方法
-  final EasyLogHandler logger;
-
-  ///日志输出级别
-  final EasyLogLevel logLevel;
-
-  ///日志输出标签
-  final String? logTag;
-
-  ///根服务器地址
-  final String host;
-
-  ///根服务器端口
-  final int port;
+  ///根客户端配置，除[EasyClientConfig.pwd]参数被[secret]覆盖而忽略，其它参数均有效
+  final EasyClientConfig config;
 
   ///商户唯一标志
   final String bsid;
@@ -34,14 +22,8 @@ class NetClient {
   ///商户通讯密钥
   final String secret;
 
-  ///是否用二进制收发数据，需要与服务端保持一致
-  final bool binary;
-
   ///是否启用隔离线程进行数据编解码
   final bool isolate;
-
-  ///是否启用ssl证书模式，需要与服务端保持一致
-  final bool sslEnable;
 
   ///登录凭据回调
   final void Function(User user, String? credentials) onCredentials;
@@ -113,16 +95,10 @@ class NetClient {
   final Map<ObjectId, bool> _dirtyTeamuserStateMap;
 
   NetClient({
-    this.logger = EasyLogger.printLogger,
-    this.logLevel = EasyLogLevel.debug,
-    this.logTag,
-    required this.host,
-    required this.port,
+    required this.config,
     required this.bsid,
     required this.secret,
-    this.binary = true,
     this.isolate = true,
-    this.sslEnable = false,
     required this.onCredentials,
   })  : business = Business(id: DbQueryField.hexstr2ObjectId(bsid), secret: secret),
         user = User(id: DbQueryField.emptyObjectId),
@@ -138,9 +114,9 @@ class NetClient {
         _teamshipMap = {},
         _teamuserMapMap = {},
         _customXPageMap = {},
-        _httpGuestClient = EasyClient(config: EasyClientConfig(logger: logger, logLevel: logLevel, logTag: logTag, host: host, port: port, binary: binary, sslEnable: sslEnable))..bindUser(bsid, token: secret),
-        _httpAliveClient = EasyClient(config: EasyClientConfig(logger: logger, logLevel: logLevel, logTag: logTag, host: host, port: port, binary: binary, sslEnable: sslEnable)),
-        _websocketClient = EasyClient(config: EasyClientConfig(logger: logger, logLevel: logLevel, logTag: logTag, host: host, port: port, binary: binary, sslEnable: sslEnable)),
+        _httpGuestClient = EasyClient(config: config)..bindUser(bsid, token: secret),
+        _httpAliveClient = EasyClient(config: config),
+        _websocketClient = EasyClient(config: config),
         _dirtySessionState = true,
         _dirtyWaitshipState = true,
         _dirtyUsershipState = true,
@@ -1885,14 +1861,31 @@ class NetClient {
   /* **************** 缓存方法 **************** */
 
   ///重新创建websocket连接的客户端
-  void _resetWebsocketClient(Map<String, dynamic> config) {
+  void _resetWebsocketClient(Map<String, dynamic> websocketConfig) {
     //解绑口令信息
     _httpAliveClient.unbindUser();
     _websocketClient.unbindUser();
     //先销毁旧的
     _websocketClient.destroy();
     //创建新的
-    _websocketClient = EasyClient(config: EasyClientConfig(logger: logger, logLevel: logLevel, logTag: logTag, host: config['host'], port: config['port'], pwd: config['pwd'], binary: binary, sslEnable: sslEnable));
+    _websocketClient = EasyClient(
+      config: EasyClientConfig(
+        logger: config.logger,
+        logLevel: config.logLevel,
+        logTag: config.logTag,
+        logFilePath: config.logFilePath,
+        logFileBackup: config.logFileBackup,
+        logFileMaxBytes: config.logFileMaxBytes,
+        host: websocketConfig['host'],
+        port: websocketConfig['port'],
+        pwd: websocketConfig['pwd'],
+        binary: config.binary,
+        timeout: config.timeout,
+        heartick: config.heartick,
+        conntick: config.conntick,
+        sslEnable: config.sslEnable,
+      ),
+    );
     //启用多线程进行数据编解码
     if (isolate) _websocketClient.initThread(_isolateHandler);
     //绑定推送数据的事件监听器
