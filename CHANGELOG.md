@@ -1,3 +1,7 @@
+## 1.1.0
+
+- Optimize client parameter structure and file structure.
+  
 ## 1.0.12
 
 - Remove paymentExists route, add paymentUpdate route, modify wechatStart route.
