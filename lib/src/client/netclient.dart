@@ -1869,21 +1869,11 @@ class NetClient {
     _websocketClient.destroy();
     //创建新的
     _websocketClient = EasyClient(
-      config: EasyClientConfig(
-        logger: config.logger,
-        logLevel: config.logLevel,
-        logTag: config.logTag,
-        logFilePath: config.logFilePath,
-        logFileBackup: config.logFileBackup,
-        logFileMaxBytes: config.logFileMaxBytes,
+      config: EasyClientConfig.fromSourceAndArgs(
+        source: config,
         host: websocketConfig['host'],
         port: websocketConfig['port'],
         pwd: websocketConfig['pwd'],
-        binary: config.binary,
-        timeout: config.timeout,
-        heartick: config.heartick,
-        conntick: config.conntick,
-        sslEnable: config.sslEnable,
       ),
     );
     //启用多线程进行数据编解码
