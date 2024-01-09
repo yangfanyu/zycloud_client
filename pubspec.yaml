@@ -1,6 +1,6 @@
 name: zycloud_client
 description: This library includes interfaces such as user module, administrator module, real-time chat module, custom data module, and Dart code push hosting module.
-version: 1.1.1
+version: 1.2.0
 repository: https://github.com/yangfanyu/zycloud_client
 
 topics:

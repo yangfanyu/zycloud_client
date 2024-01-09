@@ -1,3 +1,7 @@
+## 1.2.0
+
+- Upgrade to the latest dependent libraries.
+  
 ## 1.1.1
 
 - Simplify the calling method of creating websocket connection inside NetClient.
