@@ -347,13 +347,13 @@ class NetClient {
   ///长连接登入
   Future<EasyPacket<void>> userEnter() async {
     final mill = DateTime.now().millisecondsSinceEpoch;
-    final sign = ComTools.generateUserEnterSign(secret, user.token, user.id.toHexString(), mill);
+    final sign = ComTools.generateUserEnterSign(secret, user.token, user.id.oid, mill);
     final response = await _websocketClient.websocketRequest('userEnter', data: {'bsid': bsid, 'uid': user.id, 'mill': mill, 'sign': sign});
     if (response.ok) {
       //更新用户缓存
       user.updateByJson(response.data!['user']);
-      _httpAliveClient.bindUser(user.id.toHexString(), token: user.token); //立即绑定口令信息
-      _websocketClient.bindUser(user.id.toHexString(), token: user.token); //立即绑定口令信息
+      _httpAliveClient.bindUser(user.id.oid, token: user.token); //立即绑定口令信息
+      _websocketClient.bindUser(user.id.oid, token: user.token); //立即绑定口令信息
       onCredentials(user, encryptCredentials(user, secret));
       //更新其他缓存
       final waitshipKeys = <ObjectId>{};

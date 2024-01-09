@@ -147,6 +147,6 @@ class Session {
       }
     }
 
-    return sid.toHexString();
+    return sid.oid;
   }
 }

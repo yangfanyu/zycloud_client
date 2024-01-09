@@ -391,8 +391,8 @@ class ZyCloudClientConsole extends EasyLogger {
           if (element is UserShip) {
             logDebug([
               no++,
-              'uid(${element.rid.toHexString()})',
-              'sid(${element.sid.toHexString()})',
+              'uid(${element.rid.oid})',
+              'sid(${element.sid.oid})',
               'nick(${element.displayNick})',
               'unread(${element.unread})',
               'recent(${element.recent})',
@@ -406,8 +406,8 @@ class ZyCloudClientConsole extends EasyLogger {
           } else if (element is TeamShip) {
             logDebug([
               no++,
-              'tid(${element.rid.toHexString()})',
-              'sid(${element.sid.toHexString()})',
+              'tid(${element.rid.oid})',
+              'sid(${element.sid.oid})',
               'nick(${element.displayNick})',
               'unread(${element.unread})',
               'recent(${element.recent})',
@@ -513,8 +513,8 @@ class ZyCloudClientConsole extends EasyLogger {
         for (var element in azList) {
           if (element is UserShip) {
             logDebug([
-              'id(${element.id.toHexString()})',
-              'uid(${element.rid.toHexString()})',
+              'id(${element.id.oid})',
+              'uid(${element.rid.oid})',
               element.displayNick,
               readConstMap(element.state),
               ComTools.formatDateTime(
@@ -609,8 +609,8 @@ class ZyCloudClientConsole extends EasyLogger {
           for (var element in azList) {
             if (element is TeamShip) {
               logDebug([
-                'id(${element.id.toHexString()})',
-                'uid(${element.uid.toHexString()})',
+                'id(${element.id.oid})',
+                'uid(${element.uid.oid})',
                 element.displayNick,
                 readConstMap(element.state),
                 element.apply,
@@ -694,8 +694,8 @@ class ZyCloudClientConsole extends EasyLogger {
         for (var element in azList) {
           if (element is TeamShip) {
             logDebug([
-              'id(${element.id.toHexString()})',
-              'tid(${element.rid.toHexString()})',
+              'id(${element.id.oid})',
+              'tid(${element.rid.oid})',
               element.displayNick,
               readConstMap(element.state),
               element.apply,
@@ -746,7 +746,7 @@ class ZyCloudClientConsole extends EasyLogger {
         logDebug(['共$unread条好友申请信息:']);
         for (var element in okList) {
           if (element is UserShip) {
-            logDebug(['uid(${element.uid.toHexString()})', element.displayNick, readConstMap(element.state), element.apply, ComTools.formatDateTime(element.time, yyMMdd: true, hhmmss: true)]);
+            logDebug(['uid(${element.uid.oid})', element.displayNick, readConstMap(element.state), element.apply, ComTools.formatDateTime(element.time, yyMMdd: true, hhmmss: true)]);
           } else {
             logDebug([element]);
           }
@@ -828,7 +828,7 @@ class ZyCloudClientConsole extends EasyLogger {
       MenuItem('苹果下单', () async {
         logInfo(['苹果下单输入商品序号:']);
         final goodsNo = (await readStdinLine()).trim();
-        final result = await _netClient.iospayStart(goodsNo: int.parse(goodsNo), inpayId: DbQueryField.createObjectId().toHexString(), verifyData: 'fdsfsdafdsafdsa');
+        final result = await _netClient.iospayStart(goodsNo: int.parse(goodsNo), inpayId: DbQueryField.createObjectId().oid, verifyData: 'fdsfsdafdsafdsa');
         if (result.ok) {
           logDebug([result.desc]);
           Future.delayed(delayDuration, () => paymentPage());

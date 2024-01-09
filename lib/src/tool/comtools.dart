@@ -76,14 +76,14 @@ class ComTools {
   static String formatUserNick(User user) {
     if (user.nick.isNotEmpty) return user.nick;
     if (user.no.isNotEmpty) return user.no;
-    return user.id.toHexString();
+    return user.id.oid;
   }
 
   ///格式化群组显示名称
   static String formatTeamNick(Team team) {
     if (team.nick.isNotEmpty) return team.nick;
     if (team.no.isNotEmpty) return team.no;
-    return team.id.toHexString();
+    return team.id.oid;
   }
 
   ///格式化用户显示地址
