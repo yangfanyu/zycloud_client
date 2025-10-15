@@ -15,7 +15,7 @@ class ComTools {
   }
 
   ///翻译整数常量值
-  static String translateConstant(int key) => Constant.constMap[VmTranslate.languageCode]?[key] ?? key.toString();
+  static String translateConstant(int key) => Constant.constMap[EasyLocale.languageCode]?[key] ?? key.toString();
 
   ///RMB分转RMB元
   static String rmbfenToRmbYuan(int rmbfen, {bool plus = false, int digits = 2}) => '${plus && rmbfen > 0 ? '+' : ''}${(rmbfen / 100).toStringAsFixed(digits)}';
