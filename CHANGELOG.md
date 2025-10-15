@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Upgrade to the latest dependent libraries.
+  
 ## 1.2.0
 
 - Upgrade to the latest dependent libraries.
